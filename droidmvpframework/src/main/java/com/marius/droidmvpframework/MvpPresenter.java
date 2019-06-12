@@ -81,8 +81,8 @@ public abstract class MvpPresenter implements MvpOps.BaseProvidedPresenterOps, M
     }
 
     @Override
-    public void onDestroy() {
-        baseModel.onDestroy();
+    public void onDestroy(boolean changingConfigurations) {
+        baseModel.onDestroy(changingConfigurations);
     }
 
     @Override

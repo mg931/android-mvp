@@ -37,7 +37,7 @@ public interface MvpOps {
 
         void onRestart();
 
-        void onDestroy();
+        void onDestroy(boolean changingConfigurations);
 
         void onSaveInstanceState(Bundle outState);
     }
@@ -62,7 +62,7 @@ public interface MvpOps {
 
         void onRestart();
 
-        void onDestroy();
+        void onDestroy(boolean changingConfigurations);
 
         void onSaveInstanceState(Bundle outState);
     }

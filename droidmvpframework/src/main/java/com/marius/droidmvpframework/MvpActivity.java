@@ -56,7 +56,7 @@ public abstract class MvpActivity extends AppCompatActivity implements MvpOps.Ba
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mPresenter.onDestroy();
+        mPresenter.onDestroy(isChangingConfigurations());
     }
 
     @Override
