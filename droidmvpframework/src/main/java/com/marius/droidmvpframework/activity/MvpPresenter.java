@@ -1,4 +1,4 @@
-package com.marius.droidmvpframework;
+package com.marius.droidmvpframework.activity;
 
 import android.app.Activity;
 import android.content.Context;

@@ -3,8 +3,8 @@ package com.marius.droidmvp;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.marius.droidmvpframework.MvpActivity;
-import com.marius.droidmvpframework.MvpOps;
+import com.marius.droidmvpframework.activity.MvpActivity;
+import com.marius.droidmvpframework.activity.MvpOps;
 
 public class MainActivity extends MvpActivity implements MainMvpOps.BaseRequiredViewOps {
     private MainMvpOps.BaseProvidedPresenterOps mPresenter;

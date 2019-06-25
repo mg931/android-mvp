@@ -1,4 +1,4 @@
-package com.marius.droidmvpframework;
+package com.marius.droidmvpframework.activity;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -18,6 +18,7 @@ public class MvpStateManager {
         mStateMaintainerTag = stateMaintainerTAG;
     }
 
+
     public boolean firstTimeIn() {
         try {
             mStateMaintainerFrag = (MvpStateManager.StateMngFragment) mFragmentManager.get().findFragmentByTag(mStateMaintainerTag);
@@ -36,23 +37,12 @@ public class MvpStateManager {
         }
     }
 
-    public boolean wasRecreated() { return mIsRecreating; }
-
     public void put(String key, Object obj) {
         mStateMaintainerFrag.put(key, obj);
     }
 
-    public void put(Object obj) {
-        put(obj.getClass().getName(), obj);
-    }
-
-
     public MvpOps.BaseProvidedPresenterOps get(String key)  {
         return mStateMaintainerFrag.get(key);
-    }
-
-    public boolean hasKey(String key) {
-        return mStateMaintainerFrag.get(key) != null;
     }
 
     public static class StateMngFragment extends Fragment {
@@ -66,10 +56,6 @@ public class MvpStateManager {
 
         public void put(String key, Object obj) {
             mData.put(key, obj);
-        }
-
-        public void put(Object object) {
-            put(object.getClass().getName(), object);
         }
 
         public MvpOps.BaseProvidedPresenterOps get(String key) {

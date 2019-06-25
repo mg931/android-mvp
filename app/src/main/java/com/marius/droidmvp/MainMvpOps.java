@@ -1,6 +1,6 @@
 package com.marius.droidmvp;
 
-import com.marius.droidmvpframework.MvpOps;
+import com.marius.droidmvpframework.activity.MvpOps;
 
 public interface MainMvpOps {
     interface BaseRequiredViewOps extends MvpOps.BaseRequiredViewOps {

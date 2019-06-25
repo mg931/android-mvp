@@ -2,7 +2,7 @@ package com.marius.droidmvp;
 
 import android.os.Handler;
 
-import com.marius.droidmvpframework.MvpInteractor;
+import com.marius.droidmvpframework.activity.MvpInteractor;
 
 public class MainInteractor extends MvpInteractor implements MainMvpOps.BaseProvidedModelOps {
     private MainMvpOps.BaseRequiredPresenterOps mPresenter;

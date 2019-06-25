@@ -1,7 +1,7 @@
 package com.marius.droidmvp;
 
-import com.marius.droidmvpframework.MvpOps;
-import com.marius.droidmvpframework.MvpPresenter;
+import com.marius.droidmvpframework.activity.MvpOps;
+import com.marius.droidmvpframework.activity.MvpPresenter;
 
 import java.lang.ref.WeakReference;
 

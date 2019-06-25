@@ -1,4 +1,4 @@
-package com.marius.droidmvpframework;
+package com.marius.droidmvpframework.activity;
 
 import android.os.Bundle;
 
