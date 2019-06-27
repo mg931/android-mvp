@@ -118,4 +118,9 @@ public abstract class MvpFragment extends Fragment implements MvpFragOps.BaseReq
         return getActivity();
     }
 
+    @Override
+    public Bundle getFragmentArgs() {
+        return getArguments();
+    }
+
 }

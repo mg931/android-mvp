@@ -9,6 +9,8 @@ public interface MvpFragOps {
         Context context() throws NullPointerException;
 
         Activity activity() throws NullPointerException;
+
+        Bundle getFragmentArgs();
     }
 
     interface BaseProvidedPresenterOps {
