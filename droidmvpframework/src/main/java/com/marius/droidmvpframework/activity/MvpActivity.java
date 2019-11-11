@@ -13,7 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Toast;
 
 public abstract class MvpActivity extends AppCompatActivity implements MvpOps.BaseRequiredViewOps {
-    private final MvpStateManager mStateManager = new MvpStateManager(getFragmentManager(), MvpActivity.class.getName());
+    private final MvpStateManager mStateManager = new MvpStateManager(getFragmentManager(),
+            MvpActivity.class.getName());
     private static final String PRESENTER_KEY = "pres";
     private MvpOps.BaseProvidedPresenterOps mPresenter;
 
