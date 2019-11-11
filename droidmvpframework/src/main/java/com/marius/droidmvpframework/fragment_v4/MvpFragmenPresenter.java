@@ -6,7 +6,8 @@ import android.os.Bundle;
 
 import java.lang.ref.WeakReference;
 
-public abstract class MvpFragmenPresenter implements MvpFragOps.BaseProvidedPresenterOps, MvpFragOps.BaseRequiredPresenterOps {
+public abstract class MvpFragmenPresenter implements MvpFragOps.BaseProvidedPresenterOps,
+        MvpFragOps.BaseRequiredPresenterOps {
     private WeakReference<MvpFragOps.BaseRequiredViewOps> mView;
     private MvpFragOps.BaseProvidedModelOps mModel;
 
