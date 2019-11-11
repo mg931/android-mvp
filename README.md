@@ -77,8 +77,11 @@ This example shows how the presenter might handle the user entering a note which
 
 The Interactor layer contains the application's data and is where business rules are enforced. It provides the presenter with a set of services via the ProvidedModelOps interface, and hides specific implementation details relating to how data is structured, stored and retrieved. 
 
-# Setup 
+# Installation  
 ## 1. Provide the gradle dependency
 ```gradle
 implementation 'com.github.mg931:android-mvp:v0.0.5'
 ```
+
+# Setup an MVP Module (Activity View)   
+## 1. Create a new Activity - (for this example it will be called MainActivity). 
