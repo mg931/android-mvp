@@ -2,18 +2,19 @@
 
 This library provides a simple core framework for building Android apps using the MVP (Model-View-Presenter) pattern. 
 
-The framework provides a set of core classes and base interfaces that structure interactions between the View, Presenter and Model/Interactor layers:
-1. **BaseRequiredViewops** (View Operations Permitted to Presenter) 
-2. **BaseProvidedPresenterOps** (Presenter Operations Permitted to View) 
-3. **BaseRequiredPresenterOps** (Presenter Operations Permitted to Model)
-4. **BaseProvidedModelOps** (Model Operations Permitted to Presenter) 
+The framework contains a set of core classes and base interfaces that can be extended to set up a basic MVP module with an Activity/Fragment as the view layer. 
 
 ![MVP Interfaces](https://cms-assets.tutsplus.com/uploads/users/1308/posts/26206/image/MVP_interfaces.png)
 
-**Benefits of MVP include**
-* Seperates UI logic from business logic. Code becomes easier to understand, maintain and debug. 
+1. **RequiredViewops** (View Operations Permitted to Presenter) 
+2. **ProvidedPresenterOps** (Presenter Operations Permitted to View) 
+3. **RequiredPresenterOps** (Presenter Operations Permitted to Model)
+4. **ProvidedModelOps** (Model Operations Permitted to Presenter) 
+
+**Benefits of MVP**
+*  By seperating UI and business logic, Activities become passive views and do not bloat into untestable god classes. 
 * Interfaces between the MVP layers are simple to mock and it's possible to achieve high test coverage. 
-* Presenters are not bound to the Activity/Fragment lifecycle. This simplifies asynchronous operations during scenarios like screen-rotation where new activity instances are injected into the presenter by the framework. See the sample app. 
+* Presenters are not bound to the Activity/Fragment lifecycle. This simplifies asynchronous operations during scenarios like screen-rotation. Refer to sample app for an example. 
 
 ## MVP Layers and Responsibilities 
 
