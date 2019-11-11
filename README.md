@@ -2,7 +2,7 @@
 
 This library provides a simple core framework for building Android apps using the MVP (Model-View-Presenter) pattern. 
 
-The framework provides base interfaces that define the interactions between the View, Presenter and Model/Interactor layers:
+The framework provides a set of core classes and base interfaces that structure interactions between the View, Presenter and Model/Interactor layers:
 1. **BaseRequiredViewops** (View Operations Permitted to Presenter) 
 2. **BaseProvidedPresenterOps** (Presenter Operations Permitted to View) 
 3. **BaseRequiredPresenterOps** (Presenter Operations Permitted to Model)
@@ -11,20 +11,19 @@ The framework provides base interfaces that define the interactions between the 
 ![MVP Interfaces](https://cms-assets.tutsplus.com/uploads/users/1308/posts/26206/image/MVP_interfaces.png)
 
 **Benefits of MVP include**
-* Separates UI logic from business logic. This has major advantages when dealing with the Activity life-cycle. 
-* Mvp interfaces are simple to mock and you can achieve high coverage for unit and integration tests. 
-* Simplifies management of threads and asynchronous operations. 
-* By turning Activities into passive views, it is much easier to manage and restore application state. 
+* Seperates UI logic from business logic. Code becomes easier to understand, maintain and debug. 
+* Interfaces between the MVP layers are simple to mock and it's possible to achieve high test coverage. 
+* Presenters are not bound to the Activity/Fragment lifecycle. This simplifies asynchronous operations during scenarios like screen-rotation where new activity instances are injected into the presenter by the framework. See the sample app. 
 
 ## MVP Layers and Responsibilities 
 
 ### View
-The view only knows about the presenter and it's responsibilities do not extend beyond providing the presenter with a way to access UI components. It should contain short (ideally one line) methods for updating a UI component. 
+The view only knows about the presenter and it's responsibilities do not extend beyond providing the presenter with a way to access UI components. It should contain short (ideally one line) methods for updating UI components. 
 
 For example... 
 ```
   @Override
-  public void updateMyTextViewDialog(String text) {
+  public void updateMyTextView(String text) {
     myTextView.setText(text);
  }
 
@@ -42,10 +41,10 @@ For example...
 
 The Presenter is responsible for configuring the user interface and delegating data-related operations to the interactor (e.g. save, store, update, retrieve).
 
-This example shows how the presenter might handle the user entering a note and then posting to a web API. 
+This example shows how the presenter might handle the user entering a note which is then posted to a web API. 
 ```
     @Override
-    public void postNoteClicked() {
+    public void storeNewNoteClicked() {
         Rescue.execute(() -> {
             getView().setProgressBarVisibility(VISIBLE);
             String note = getView().getInputtedNote(); 
@@ -75,7 +74,7 @@ This example shows how the presenter might handle the user entering a note and t
 
 ### Model (Interactor) 
 
-The Interactor layer contains the application's data (the model) and is where business rules are enforced. It provides the presenter with a set of services via the ProvidedModelOps interface, and hides specific implementation details relating to how data is structured, stored and retrieved. 
+The Interactor layer contains the application's data and is where business rules are enforced. It provides the presenter with a set of services via the ProvidedModelOps interface, and hides specific implementation details relating to how data is structured, stored and retrieved. 
 
 # Setup 
 ## 1. Provide the gradle dependency
