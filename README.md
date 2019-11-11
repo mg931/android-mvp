@@ -34,57 +34,51 @@ For example...
 }
 
   @Override
-  public void showProgressDialog() {
-    progressDialog.setVisibility(View.VISIBLE);
+  public void setProgressBarVisibility(int visibility) {
+    progressDialog.setVisibility(visibility);
 }
 ```
 ### Presenter
 
-The Presenter is responsible for configuring the view while calling services provided by the interactor (e.g. make http request, load data from database).
+The Presenter is responsible for configuring the user interface and delegating data-related operations to the interactor (e.g. save, store, update, retrieve).
 
-In this example, the user has clicked to open the holiday calendar. 
+This example shows how the presenter might handle the user entering a note and then posting to a web API. 
 ```
-private void loadCalendar() {
-        try {
-            getView().showCalendarLoadingProgressDialog();
-            mModel.requestCalendarUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    @Override
+    public void postNoteClicked() {
+        Rescue.execute(() -> {
+            getView().setProgressBarVisibility(VISIBLE);
+            String note = getView().getInputtedNote(); 
+            mModel.storeNote(note); 
+        }); 
     }
 
     @Override
-    public void calendarEventsLoaded(List<CalendarEvent> eventList) {
-        try {
-            getView().hideCalendarLoadingProgressDialog();
-            getView().configureCalendar(eventList, minDate, maxDate);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void noteSuccesfullyStored() {
+        Rescue.execute(() -> {
+           getView().setProgressBarVisibility(GONE);
+           showSuccessSnackBar(R.string.note_successfully_saved_msg); 
+        }); 
     }
 
     @Override
-    public void errorLoadingCalendar() {
-        try {
-            getView().hideCalendarLoadingProgressDialog();
-            getView().showToast("An error occurred loading the calendar. Please retry.");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void errorStoringNote(String error) {
+       Rescue.execute(() -> {
+            getView().setProgressBarVisibility(GONE);
+            showErrorSnackBar("Something went wrong: " + error); 
+        }); 
     }
 ```
-1. The presenter responds to the click event by telling the view to show a loading dialog. 
-2. The presenter tells the model to load the required data. 
-3. The presenter updates the UI depending on the model's response (load the calendar or show error). 
+1. The presenter responds to the click event by telling the view to show a progress bar. 
+2. The presenter tells the model to store the inputted data. 
+3. The presenter updates the UI depending on the model's response (success or failure). 
 
 ### Model (Interactor) 
 
-The Interactor layer is responsible for managing the application's data (the model) and enforcing business rules. It provides the presenter with a set of services via the ProvidedModelOps interface, and hides specific implementation details relating to how data is structured, stored and retrieved. 
-
-
+The Interactor layer contains the application's data (the model) and is where business rules are enforced. It provides the presenter with a set of services via the ProvidedModelOps interface, and hides specific implementation details relating to how data is structured, stored and retrieved. 
 
 # Setup 
 ## 1. Provide the gradle dependency
 ```gradle
-implementation 'com.github.mg931:android-mvp:v0.0.'
+implementation 'com.github.mg931:android-mvp:v0.0.5'
 ```
