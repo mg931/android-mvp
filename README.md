@@ -10,4 +10,4 @@ This library provides a simple core framework for building Android apps using th
 implementation 'com.github.mg931:android-mvp:v0.0.'
 ```
 
-![MVP Pattern Diagram](https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwjXj6Gg7uHlAhWB4IUKHczMCNMQjRx6BAgBEAQ&url=https%3A%2F%2Fmedium.com%2F%40tinmegali%2Fmodel-view-presenter-mvp-in-android-part-2-a15e35891095&psig=AOvVaw1kimqvr4DsosA62rCz7qcT&ust=1573551481473007)
+![MVP Pattern Diagram](https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwjx5drt7uHlAhUpz4UKHai-BFAQjRx6BAgBEAQ&url=https%3A%2F%2Fcode.tutsplus.com%2Ftutorials%2Fhow-to-adopt-model-view-presenter-on-android--cms-26206&psig=AOvVaw1kimqvr4DsosA62rCz7qcT&ust=1573551481473007)
