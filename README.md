@@ -84,4 +84,4 @@ implementation 'com.github.mg931:android-mvp:v0.0.5'
 ```
 
 # Setup an MVP Module (Activity View)   
-## 1. Create a new Activity - (for this example it will be called MainActivity). 
+#### 1. Create a new Activity - (for this example it will be called MainActivity). 
