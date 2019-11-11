@@ -18,10 +18,10 @@ public class MvpStateManager {
         mStateMaintainerTag = stateMaintainerTAG;
     }
 
-
     public boolean firstTimeIn() {
         try {
-            mStateMaintainerFrag = (MvpStateManager.StateMngFragment) mFragmentManager.get().findFragmentByTag(mStateMaintainerTag);
+            mStateMaintainerFrag = (MvpStateManager.StateMngFragment) mFragmentManager.get()
+                    .findFragmentByTag(mStateMaintainerTag);
             if (mStateMaintainerFrag == null) {
                 mStateMaintainerFrag = new MvpStateManager.StateMngFragment();
                 mFragmentManager.get().beginTransaction()

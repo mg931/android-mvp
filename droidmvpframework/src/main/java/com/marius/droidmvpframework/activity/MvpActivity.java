@@ -4,16 +4,17 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Toast;
 
 public abstract class MvpActivity extends AppCompatActivity implements MvpOps.BaseRequiredViewOps {
-    private final MvpStateManager mStateManager = new MvpStateManager(getFragmentManager(), MvpActivity.class.getName());
+    private final MvpStateManager mStateManager = new MvpStateManager(getFragmentManager(),
+            MvpActivity.class.getName());
     private static final String PRESENTER_KEY = "pres";
     private MvpOps.BaseProvidedPresenterOps mPresenter;
 
