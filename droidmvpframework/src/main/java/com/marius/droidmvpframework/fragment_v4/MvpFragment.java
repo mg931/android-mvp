@@ -3,7 +3,7 @@ package com.marius.droidmvpframework.fragment_v4;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 public abstract class MvpFragment extends Fragment implements MvpFragOps.BaseRequiredViewOps {
     private MvpFragOps.BaseProvidedPresenterOps mPresenter;
