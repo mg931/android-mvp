@@ -425,6 +425,7 @@ The following life-cycle methods are also called through the stack and you can o
 
 ## Caveats  
 
+#### Retaining the presenter  
 1. The framework will always attempt to store the presenter and reattach it when an activity is recreated after a screen rotation. There are certain instances where this is not guarenteed to happen, however:
 - When the app is restored after a device reset. 
 - When the device is exceptionally low on memory.
@@ -432,7 +433,8 @@ The following life-cycle methods are also called through the stack and you can o
 
 If you need to retain state in these scenarios, use the bundle passed in on onSavedInstanceState. 
 
-
+#### Avoiding memory leaks 
+Excercise caution if you store classes in your presenter/interactors that take a context or activity object in their constructors. 
 
 
 
