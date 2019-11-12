@@ -22,7 +22,7 @@ Projects and code bases grow quickly and can become brittle with too much comple
 ## Roles and Responsibilities 
 
 ### View
-The view only knows about the presenter and it's responsibilities do not extend beyond providing the presenter with a way to access UI components. It should contain short (ideally one line) methods for updating UI components. 
+The view only knows about the presenter and it's responsibilities do not extend beyond providing the presenter with a way to access UI components. It should be as passive as possible and contain short (ideally one line) methods for updating UI components. 
 
 For example... 
 ```
