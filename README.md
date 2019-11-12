@@ -229,12 +229,6 @@ public class MainFragment extends MvpFragment implements MainFragmentOps.Require
     private MainFragmentOps.ProvidedPresenterOps mPresenter;
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.main_fragment, container, false);
-        return view;
-    }
-
-    @Override
     protected MainFragmentOps.ProvidedPresenterOps setUpComponent() {
         MainFragmentPresenter presenter = new MainFragmentPresenter(this);
         MainFragmentInteractor model = new MainFragmentInteractor(presenter);
