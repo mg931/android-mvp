@@ -178,7 +178,7 @@ public class MainPresenter extends MvpPresenter implements MainMvpOps.ProvidedPr
 }
 ```
 
-#### 3. Create the model/interactor. 
+#### 4. Create the model/interactor. 
 
 Like the view, the model only communicates with the presenter - however, it's only concern should be data and it should know nothing about the user interface (configuring the ui is the presenter's responsibility). It communicates with the presenter using the MainMvpOps.RequiredPresenterOps interface. 
 
