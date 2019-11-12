@@ -15,9 +15,9 @@ This framework came out of a commerical Android app that was built for the civil
 * ### Testing 
 MVP is particularly useful for Android when test coverage is a high priority. The interfaces in this structure are easy to mock using only JUnit (heavy test frameworks like Robolectric are useful but not necessary).
 * ### Managing Activity/Fragment Life-cycle 
-* Managing state and asynchonous operations can quickly evolve into a nightmare if you write all your code inside an Activity or Fragment (the direction most Android tutorials seem to push you in). To make life easier, you might tell the activity not to recreate, or fix the device orietnation in portrait - short term fixes that have significant drawbacks. 
-
-To address these issues, thsi framework handles the detachment and re-attachment of the presenter/model layers when the activity is destroyed/recreated during an event like screen rotation. It then injects in a new view instance into the presenter (all under the hood). This means the presenter always has access to an up-to-date reference to the view after any long-running operation. 
+Managing state and asynchronous operations can quickly evolve into a nightmare if you write all your code inside an Activity or Fragment. To make life easier, you might tell the activity not to recreate, or fix the device orietnation in portrait - short term fixes that have many drawbacks that come back to haunt you. To address these issues, this framework handles the detachment and re-attachment of the presenter/model layers when the activity is destroyed/recreated during an event like screen rotation. It  injects in a new view instance into the presenter (all under the hood) which means the presenter always has access to an up-to-date reference to the view after any long-running operation. 
+* ### Seperation of Concerns 
+Projects and code bases grow quickly and can become brittle with too much complexity and no clear structure. By enforcing  general rules about the reasponsibility of classes and their function within a wider architecture, it's possible to structure projects into a series of small, testable modules that are robust and easy to manage. 
 
 ## MVP Layers and Responsibilities 
 
