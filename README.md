@@ -281,11 +281,11 @@ public class MainFragmentPresenter extends MvpFragmenPresenter implements
 
 ```
 public class MainFragmentInteractor extends MvpFragmentInteractor implements MainFragmentOps.ProvidedModelOps {
-    private MainFragmentOps.RequiredPresenterOps corePresenter;
+    private MainFragmentOps.RequiredPresenterOps mPresenter;
 
     public MainFragmentInteractor(MainFragmentOps.RequiredPresenterOps presenter) {
         super(presenter);
-        corePresenter = presenter;
+        mPresenter = presenter;
     }
 }
 ```
