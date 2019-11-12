@@ -280,7 +280,7 @@ public class MainFragmentPresenter extends MvpFragmenPresenter implements
 }
 ```
 
-#### 3. Create the model/interactor. 
+#### 4. Create the model/interactor. 
 
 ```
 public class MainFragmentInteractor extends MvpFragmentInteractor implements MainFragmentOps.ProvidedModelOps {
