@@ -113,7 +113,7 @@ public interface MainMvpOps {
 
 #### 2. Create the view. 
 
-The Activity will represent the view layer. It shoudld extend MvpActivity and implement MainMvpOps.RequiredViewOps which is the interface that the view will expose to the presenter. The setUpComponent() method is where the MVP classes are plugged into each other. Once initialised, the framework will spit out an MvpOps.ProvidedPresenterOps instance - this is how the view will communicate with the presenter.
+The Activity will represent the view layer. It shoudld extend MvpActivity and implement MainMvpOps.RequiredViewOps which is the interface that the view will expose to the presenter. The setUpComponent() method is where the MVP classes are plugged into each other. Once initialised, the framework will spit out an MvpOps.ProvidedPresenterOps instance - this is how the view will communicate with the presenter. 
 ```
 public class MainActivity extends MvpActivity implements MainMvpOps.RequiredViewOps {
     private MainMvpOps.ProvidedPresenterOps mPresenter;
@@ -140,7 +140,39 @@ public class MainActivity extends MvpActivity implements MainMvpOps.RequiredView
 
 ```
 
+#### 2. Create the presenter. 
 
+```
+public class MainPresenter extends MvpPresenter implements MainMvpOps.ProvidedPresenterOps,
+        MainMvpOps.RequiredPresenterOps  {
+    private WeakReference<MainMvpOps.RequiredViewOps> mView;
+    private MainMvpOps.ProvidedModelOps mModel;
+
+    public MainPresenter(MainMvpOps.RequiredViewOps view) {
+        super(view);
+        mView = new WeakReference<>(view);
+    }
+    
+    @Override
+    public void setView(MvpOps.RequiredViewOps view) {
+        super.setView(view);
+        mView = new WeakReference<>((MainMvpOps.BaseRequiredViewOps) view);
+    }
+
+    @Override
+    public void setModel(MvpOps.ProvidedModelOps model) {
+        super.setModel(model);
+        mModel = (MainMvpOps.BaseProvidedModelOps) model;
+    }
+
+    private MainMvpOps.RequiredViewOps getView() throws NullPointerException {
+        if (mView.get() == null)
+            throw new NullPointerException();
+        else
+            return mView.get();
+    }
+}
+```
 
 
 
