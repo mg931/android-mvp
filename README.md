@@ -2,7 +2,7 @@
 
 This library provides a core framework for building Android apps using the MVP (Model-View-Presenter) pattern. MVP is one of many patterns that can be used to build Android apps and there is no clear consensus on the best approach. A consistent architecture brings significant advantages to any code base, however. Classes take on clear roles and code becomes easier to change, manage, maintain and revisit months or even years later. 
 
-This framework came out of a commerical Android app that was built for the civil engineering sector. It contains a set of components that can be extended to set up an MVP module with an Activity/Fragment as the view layer. The pattern uses four interfaces to define the operations and interactions between each layer within the stack. The basic flow is view -> presenter -> interactor -> presenter -> view as shown below. 
+This framework came out of a commerical Android app that was built for the civil engineering sector. It contains a set of components that can be extended to set up an MVP module with an Activity/Fragment as the view layer. The pattern uses four interfaces to define the operations and interactions between each layer within the stack. The basic flow is view -> presenter -> interactor -> presenter -> view (as shown below). 
 
 ![MVP Interfaces](https://cms-assets.tutsplus.com/uploads/users/1308/posts/26206/image/MVP_interfaces.png)
 
