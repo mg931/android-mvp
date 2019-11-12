@@ -83,13 +83,13 @@ The Interactor layer contains the application's data and is where business rules
 implementation 'com.github.mg931:android-mvp:v0.0.5'
 ```
 
-# Setup an MVP Module (Activity as View)   
+# Setup (Activity as View)   
 
 This example assumes you are setting up an MVP module for an activity called MainActivity. The naming convention for the classes in these examples will reflect this. 
 
 #### 1. Create an interface called MainMvpOps. 
 
-Inside, create four nested interfaces that extend from the framework. These interfaces will define how the MVP layers for this module will oeprate and interact with each other.  
+Inside, create four nested interfaces that extend from the framework. These interfaces will define how the MVP layers for this module will operate and interact with each other.  
 ```
 public interface MainMvpOps {
 
@@ -113,7 +113,7 @@ public interface MainMvpOps {
 
 #### 2. Create the view. 
 
-The Activity will represent the view layer. It shoudld extend MvpActivity and implement MainMvpOps.RequiredViewOps which is the interface that the view will expose to the presenter. The setUpComponent() method is where the MVP classes are plugged into each other. Once initialised, the framework will spit out an MvpOps.ProvidedPresenterOps instance - this is how the view will communicate with the presenter. 
+The Activity will represent the view layer. It shoudld extend MvpActivity and implement MainMvpOps.RequiredViewOps which is the interface that the view will expose to the presenter. The setUpComponent() method is where the MVP classes are plugged into each other. Once initialised, the framework will spit out an instance of MvpOps.ProvidedPresenterOps - this is how the view will communicate with the presenter. 
 ```
 public class MainActivity extends MvpActivity implements MainMvpOps.RequiredViewOps {
     private MainMvpOps.ProvidedPresenterOps mPresenter;
@@ -140,8 +140,9 @@ public class MainActivity extends MvpActivity implements MainMvpOps.RequiredView
 
 ```
 
-#### 2. Create the presenter. 
+#### 3. Create the presenter. 
 
+The presenter acts as a middle man and communicates with the view and model. It communicates with the view using the MainMvpOps.RequiredViewOps interface (stored as a weak reference) and with the model using the MainMvpOps.ProvidedModelOps interface. Use the getView() helper method when calling the view from inside the presenter - the view may be unavailable in certain scenarios such as when the activity is being destroyed/recreated, so this method can throw a NullPointerException. 
 ```
 public class MainPresenter extends MvpPresenter implements MainMvpOps.ProvidedPresenterOps,
         MainMvpOps.RequiredPresenterOps  {
@@ -174,5 +175,19 @@ public class MainPresenter extends MvpPresenter implements MainMvpOps.ProvidedPr
 }
 ```
 
+#### 3. Create the model/interactor. 
 
+Like the view, the model only communicates with the presenter - however, it's only concern should be data and it should know nothing about the user interaface (configuring the ui is the presenter's reasponsibility). It communicates with the presenter using the MainMvpOps.RequiredPresenterOps interface. 
+
+```
+public class MainInteractor extends MvpInteractor implements MainMvpOps.ProvidedModelOps {
+    private MainMvpOps.RequiredPresenterOps mPresenter;
+    
+    public MainInteractor(MainMvpOps.RequiredPresenterOps presenter) {
+        super(presenter);
+        mPresenter = presenter;
+    }
+}
+
+```
 
