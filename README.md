@@ -11,7 +11,7 @@ This framework came out of a commercial Android app that was built for the civil
 3. **RequiredPresenterOps** (Presenter Operations Permitted to Model)
 4. **ProvidedModelOps** (Model Operations Permitted to Presenter) 
 
-# **Advantages of MVP**
+## **Advantages of MVP**
 * ### Testing 
 MVP is particularly useful for Android when test coverage is a high priority. The interfaces in this structure are easy to mock using only JUnit (heavy test frameworks like Robolectric are useful but not necessary).
 * ### Managing Activity/Fragment Life-cycle 
