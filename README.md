@@ -80,13 +80,13 @@ This example shows how the presenter might handle the user entering a note which
 
 The Interactor layer contains the application's data and is where business rules are enforced. It provides the presenter with a set of services via the ProvidedModelOps interface, and hides specific implementation details relating to how data is structured, stored and retrieved. 
 
-# Installation  
-## 1. Provide the gradle dependency
+## Installation  
+### 1. Provide the gradle dependency
 ```gradle
 implementation 'com.github.mg931:android-mvp:v0.0.5'
 ```
 
-# Setup (Activity as View)   
+## Setup (Activity as View)   
 
 This example assumes you are setting up an MVP module for an activity called MainActivity. The naming convention for the classes in these examples will reflect this. 
 
@@ -194,7 +194,7 @@ public class MainInteractor extends MvpInteractor implements MainMvpOps.Provided
 
 ```
 
-# Setup (Fragment as View)   
+## Setup (Fragment as View)   
 
 Setting up an MVP module using a fragment is similar to the activity setup. It involves different base classes, however, to handle the fragment lifecycle and provide some helper functions specific to fragments. 
 
