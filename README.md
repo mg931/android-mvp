@@ -2,7 +2,7 @@
 
 This library provides a core framework for building Android apps using the MVP (Model-View-Presenter) pattern. MVP is one of many patterns that can be used to build Android apps and there is no clear consensus on the best approach. A consistent architecture brings significant advantages to any code base, however. Classes take on clear roles and code becomes easier to change, manage, maintain and revisit months or even years later. 
 
-This framework came out of a commerical Android app that was built for the civil engineering sector. It contains a set of components that can be extended to set up an MVP module with an Activity/Fragment as the view layer. The pattern uses four interfaces to define the operations and interactions between each layer within the stack. The basic flow is view -> presenter -> interactor -> presenter -> view (as shown below). 
+This framework came out of a commercial Android app that was built for the civil engineering sector. It contains a set of components that can be extended to set up an MVP module with an Activity/Fragment as the view layer. The pattern uses four interfaces to define the operations and interactions between each layer within the stack. The basic flow is view -> presenter -> interactor -> presenter -> view (as shown below). 
 
 ![MVP Interfaces](https://cms-assets.tutsplus.com/uploads/users/1308/posts/26206/image/MVP_interfaces.png)
 
@@ -15,9 +15,9 @@ This framework came out of a commerical Android app that was built for the civil
 * ### Testing 
 MVP is particularly useful for Android when test coverage is a high priority. The interfaces in this structure are easy to mock using only JUnit (heavy test frameworks like Robolectric are useful but not necessary).
 * ### Managing Activity/Fragment Life-cycle 
-Managing state and asynchronous operations can quickly evolve into a nightmare if you write all your code inside an Activity or Fragment. To make life easier, you might tell the activity not to recreate, or fix the device orietnation in portrait - short term fixes that have many drawbacks that come back to haunt you. To address these issues, this framework handles the detachment and re-attachment of the presenter/model layers when the activity is destroyed/recreated during an event like screen rotation. It  injects in a new view instance into the presenter (all under the hood) which means the presenter always has access to an up-to-date reference to the view after any long-running operation. 
-* ### Seperation of Concerns 
-Projects and code bases grow quickly and can become brittle with too much complexity and no clear structure. By enforcing  general rules about the reasponsibility of classes and their function within a wider architecture, it's possible to structure projects into a series of small, testable modules that are robust and easy to manage. 
+Managing state and asynchronous operations can quickly evolve into a nightmare if you write all your code inside an Activity or Fragment. To make life easier, you might tell the activity not to recreate, or fix the device orientation in portrait - short term fixes that have many drawbacks that come back to haunt you. To address these issues, this framework handles the detachment and re-attachment of the presenter/model layers when the activity is destroyed/recreated during an event like screen rotation. It  injects in a new view instance into the presenter (all under the hood) which means the presenter always has access to an up-to-date reference to the view after any long-running operation. 
+* ### Separation of Concerns 
+Projects and code bases grow quickly and can become brittle with too much complexity and no clear structure. By enforcing  general rules about the responsibility of classes and their function within a wider architecture, it's possible to structure projects into a series of small, testable modules that are robust and easy to manage. 
 
 ## MVP Layers and Responsibilities 
 
@@ -116,7 +116,7 @@ public interface MainMvpOps {
 
 #### 2. Create the view. 
 
-The Activity will represent the view layer. It shoudld extend MvpActivity and implement MainMvpOps.RequiredViewOps which is the interface that the view will expose to the presenter. The setUpComponent() method is where the MVP classes are plugged into each other. Once initialised, the framework will spit out an instance of MvpOps.ProvidedPresenterOps - this is how the view will communicate with the presenter. 
+The Activity will represent the view layer. It should extend MvpActivity and implement MainMvpOps.RequiredViewOps which is the interface that the view will expose to the presenter. The setUpComponent() method is where the MVP classes are plugged into each other. Once initialised, the framework will spit out an instance of MvpOps.ProvidedPresenterOps - this is how the view will communicate with the presenter. 
 ```
 public class MainActivity extends MvpActivity implements MainMvpOps.RequiredViewOps {
     private MainMvpOps.ProvidedPresenterOps mPresenter;
@@ -180,7 +180,7 @@ public class MainPresenter extends MvpPresenter implements MainMvpOps.ProvidedPr
 
 #### 3. Create the model/interactor. 
 
-Like the view, the model only communicates with the presenter - however, it's only concern should be data and it should know nothing about the user interaface (configuring the ui is the presenter's reasponsibility). It communicates with the presenter using the MainMvpOps.RequiredPresenterOps interface. 
+Like the view, the model only communicates with the presenter - however, it's only concern should be data and it should know nothing about the user interface (configuring the ui is the presenter's responsibility). It communicates with the presenter using the MainMvpOps.RequiredPresenterOps interface. 
 
 ```
 public class MainInteractor extends MvpInteractor implements MainMvpOps.ProvidedModelOps {
