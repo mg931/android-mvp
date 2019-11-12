@@ -1,8 +1,8 @@
 # Android MVP
 
-This library provides a core framework for building Android apps using the MVP (Model-View-Presenter) pattern. 
+This library provides a core framework for building Android apps using the MVP (Model-View-Presenter) pattern. MVP is one of many patterns that can be used to build Android apps (MVC, MVVM, MVI etc) and there is no real consensus on the best approach. What's certain is that a consistent architecture brings significant advantages to any project - classes take on clear roles and code becomes easier to change, manage, maintain and debug. It's easier to revisit projects months or years later, and new/junior developers have a much easier time contributing to projects once they pick up the structure. 
 
-The framework contains a set of base classes and interfaces that can be extended to set up an MVP module with an Activity/Fragment as the view layer. 
+This framework came out of a commerical Android app that was built for the civil engineering sector. It contains a set of components that can be extended to set up an MVP module with an Activity/Fragment as the view layer. The pattern uses four interfaces to define the operations and interactions between each layer within the stack - the basic flow is view -> presenter -> interactor -> presenter -> view as shown below. 
 
 ![MVP Interfaces](https://cms-assets.tutsplus.com/uploads/users/1308/posts/26206/image/MVP_interfaces.png)
 
@@ -11,10 +11,9 @@ The framework contains a set of base classes and interfaces that can be extended
 3. **RequiredPresenterOps** (Presenter Operations Permitted to Model)
 4. **ProvidedModelOps** (Model Operations Permitted to Presenter) 
 
-**Benefits of MVP**
-*  By seperating UI and business logic, Activities become passive views and do not bloat into untestable god classes. 
-* Interfaces between the MVP layers are simple to mock and it's possible to achieve high test coverage. 
-* Presenters are not bound to the Activity/Fragment lifecycle. This simplifies asynchronous operations during scenarios like screen-rotation. Refer to sample app for an example. 
+**Advantages of MVP**
+* MVP is particularly useful for Android when test coverage is a high priority. The interfaces in this structure are easy to mock using only JUnit (heavy test frameworks like Robolectric are useful but not necessary). 
+* Managing state and asynchonous operations can quickly evolve into a nightmare if you write all your code inside an Activity or Fragment (the direction most Android tutorials push you in). To make life easier, you might tell the activity not to recreate, or fix the device orietnation in portrait - short term fixes that have significant drawbacks. To address these issues, this framework handles the detachment and re-attachment of the presenter/model layers when the activity is destroyed/recreated during an event like screen rotation. It then injects in a new view instance (all under the hood).  
 
 ## MVP Layers and Responsibilities 
 
