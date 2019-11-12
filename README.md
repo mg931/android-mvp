@@ -117,6 +117,8 @@ public interface MainMvpOps {
 #### 2. Create the view. 
 
 The Activity will represent the view layer. It should extend MvpActivity and implement MainMvpOps.RequiredViewOps which is the interface that the view will expose to the presenter. The setUpComponent() method is where the MVP classes are plugged into each other. Once initialised, the framework will spit out an instance of MvpOps.ProvidedPresenterOps - which is how the view will access the operations it is permitted to call on the presenter. 
+
+The result of setUpComponent() will be stored by the framework on the first launch of the app. When the activity is being recreated after screen rotation, for example, the presenter will already exist and will be passed straight to componentInitialized() unless the device is very low on memory or 'do not keep activities' is checked in developer options (see caveats). 
 ```
 public class MainActivity extends MvpActivity implements MainMvpOps.RequiredViewOps {
     private MainMvpOps.ProvidedPresenterOps mPresenter;
@@ -289,5 +291,149 @@ public class MainFragmentInteractor extends MvpFragmentInteractor implements Mai
     }
 }
 ```
+## Helpers 
+The framework includes a few extra helpers you can call from your presenters. 
+
+#### Activity Presenter 
+```
+//get the current context
+Context context = mPresenter.context();
+
+//get the current activity
+Activity activity = mPresenter.activity();
+
+//get a string resource 
+String myString = mPresenter.getStringResource(R.id.my_string);
+
+//get activity intent  
+Intent intent = mPresenter.getActivityIntent(R.id.my_string);
+```
+#### Fragment Presenter 
+```
+//get the current context
+Context context = mPresenter.context();
+
+//get the current activity
+Activity activity = mPresenter.activity();
+
+//get activity intent  
+Bundle bundle = mPresenter.getFragmentArgs();
+```
+
+The following life-cycle methods are also called through the stack and you can override them inside your presenter/interactor. 
+
+#### Activity 
+```
+ @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+```
+#### Fragment
+```
+  @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle inState) {
+        super.onActivityCreated(inState);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mPresenter.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+```
+
+## Caveats  
+
+1. The framework will always attempt to store the presenter and reattach it when an activity is recreated after a screen rotation. There are certain instances where this is not guarenteed to happen, however:
+- When the app is restored after a device reset. 
+- When the device is exceptionally low on memory.
+- When 'Do not keep activities' is checked inside the device's developer options. 
+
+If you need to retain state in these scenarios, use the bundle passed in on onSavedInstanceState. 
+
+
+
+
 
 
