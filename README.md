@@ -19,7 +19,7 @@ Managing state and asynchronous operations can quickly evolve into a nightmare i
 * ### Separation of Concerns 
 Projects and code bases grow quickly and can become brittle with too much complexity and no clear structure. By enforcing  general rules about the responsibility of classes and their function within a wider architecture, it's possible to structure projects into a series of small, testable modules that are robust and easy to manage. 
 
-## MVP Layers and Responsibilities 
+## Roles and Responsibilities 
 
 ### View
 The view only knows about the presenter and it's responsibilities do not extend beyond providing the presenter with a way to access UI components. It should contain short (ideally one line) methods for updating UI components. 
