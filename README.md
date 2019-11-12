@@ -116,7 +116,7 @@ public interface MainMvpOps {
 
 #### 2. Create the view. 
 
-The Activity will represent the view layer. It should extend MvpActivity and implement MainMvpOps.RequiredViewOps which is the interface that the view will expose to the presenter. The setUpComponent() method is where the MVP classes are plugged into each other. Once initialised, the framework will spit out an instance of MvpOps.ProvidedPresenterOps - this is how the view will communicate with the presenter. 
+The Activity will represent the view layer. It should extend MvpActivity and implement MainMvpOps.RequiredViewOps which is the interface that the view will expose to the presenter. The setUpComponent() method is where the MVP classes are plugged into each other. Once initialised, the framework will spit out an instance of MvpOps.ProvidedPresenterOps - which is how the view will access the operations it is permitted to call on the presenter. 
 ```
 public class MainActivity extends MvpActivity implements MainMvpOps.RequiredViewOps {
     private MainMvpOps.ProvidedPresenterOps mPresenter;
