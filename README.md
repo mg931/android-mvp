@@ -29,17 +29,17 @@ For example...
   @Override
   public void updateMyTextView(String text) {
     myTextView.setText(text);
- }
+  }
 
   @Override
   public void showToast(int length, String msg) {
     Toast.makeText(this, msg, length).show();
-}
+  }
 
   @Override
   public void setProgressBarVisibility(int visibility) {
     progressDialog.setVisibility(visibility);
-}
+  }
 ```
 ### Presenter
 
