@@ -320,7 +320,7 @@ Activity activity = mPresenter.activity();
 Bundle bundle = mPresenter.getFragmentArgs();
 ```
 
-The following life-cycle methods are also called through the stack and you can override them inside your presenter/interactor. 
+The following life-cycle methods are also called through the stack and you can override them inside your presenters and interactor classes. The activity onDestroy() contains an additonal flag isChangingConfigurations(). 
 
 #### Activity 
 ```
