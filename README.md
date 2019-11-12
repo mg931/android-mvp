@@ -87,7 +87,9 @@ implementation 'com.github.mg931:android-mvp:v0.0.5'
 
 This example assumes you are setting up an MVP module for an activity called MainActivity. The naming convention for the classes in these examples will reflect this. 
 
-#### 1. Create an interface called MainMvpOps. Inside, create four nested interfaces that extend from the framework. These interfaces will define how the MVP layers for this module will oeprate and interact with each other.  
+#### 1. Create an interface called MainMvpOps. 
+
+Inside, create four nested interfaces that extend from the framework. These interfaces will define how the MVP layers for this module will oeprate and interact with each other.  
 ```
 public interface MainMvpOps {
 
@@ -109,7 +111,9 @@ public interface MainMvpOps {
 }
 ```
 
-#### 2. Create the view. The Activity will represent the view layer. It shoudld extend MvpActivity and implement MainMvpOps.RequiredViewOps which is the interface that the view will expose to the presenter. The setUpComponent() method is where the MVP classes are plugged into each other. Once initialised, the framework will spit out an MvpOps.ProvidedPresenterOps instance - this is how the view will communicate with the presenter.
+#### 2. Create the view. 
+
+The Activity will represent the view layer. It shoudld extend MvpActivity and implement MainMvpOps.RequiredViewOps which is the interface that the view will expose to the presenter. The setUpComponent() method is where the MVP classes are plugged into each other. Once initialised, the framework will spit out an MvpOps.ProvidedPresenterOps instance - this is how the view will communicate with the presenter.
 ```
 public class MainActivity extends MvpActivity implements MainMvpOps.RequiredViewOps {
     private MainMvpOps.ProvidedPresenterOps mPresenter;
