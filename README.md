@@ -191,3 +191,93 @@ public class MainInteractor extends MvpInteractor implements MainMvpOps.Provided
 
 ```
 
+# Setup (Fragment as View)   
+
+Setting up an MVP module using a fragment is similar to the activity setup. It involves different base classes, however, to handle the fragment lifecycle and provide some helper functions specific to fragments. 
+
+#### 1. Create an interface called MainFragmentOps. 
+
+```
+public interface MainFragmentOps {
+    interface RequiredViewOps extends MvpFragOps.BaseRequiredViewOps {
+
+    }
+
+    interface ProvidedPresenterOps extends MvpFragOps.BaseProvidedPresenterOps {
+
+    }
+
+    interface RequiredPresenterOps extends MvpFragOps.BaseRequiredPresenterOps {
+
+    }
+
+    interface ProvidedModelOps extends MvpFragOps.BaseProvidedModelOps {
+
+    }
+}
+```
+
+#### 2. Create the view.
+
+Here Mvp fragment extends Fragment. 
+
+```
+public class MainFragment extends MvpFragment implements MainFragmentOps.RequiredViewOps {
+    private MainFragmentOps.ProvidedPresenterOps mPresenter;
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.main_fragment, container, false);
+        return view;
+    }
+
+    @Override
+    protected MainFragmentOps.ProvidedPresenterOps setUpComponent() {
+        MainFragmentPresenter presenter = new MainFragmentPresenter(this);
+        MainFragmentInteractor model = new MainFragmentInteractor(presenter);
+        presenter.setModel(model);
+        return presenter;
+    }
+
+    @Override
+    protected void componentInitialized(MvpFragOps.BaseProvidedPresenterOps pres) {
+        mPresenter = (MainFragmentOps.ProvidedPresenterOps) pres;
+    }
+}
+```
+
+#### 3. Create the presenter.
+
+```
+public class MainFragmentPresenter extends MvpFragmenPresenter implements
+        MainFragmentOps.ProvidedPresenterOps, MainFragmentOps.RequiredPresenterOps {
+    private WeakReference<MainFragmentOps.RequiredViewOps> mView;
+    private MainFragmentOps.ProvidedModelOps mModel;
+
+    public MainFragmentPresenter(MainFragmentOps.RequiredViewOps view) {
+        super(view);
+        mView = new WeakReference<>(view);
+    }
+
+    private MainFragmentOps.RequiredViewOps getView() throws NullPointerException {
+        if (mView.get() == null)
+            throw new NullPointerException();
+        else
+            return mView.get();
+    }
+
+    @Override
+    public void setView(MvpFragOps.BaseRequiredViewOps view) {
+        super.setView(view);
+        mView = new WeakReference<>((MainFragmentOps.RequiredViewOps) view);
+    }
+
+    @Override
+    public void setModel(MvpFragOps.BaseProvidedModelOps model) {
+        super.setModel(model);
+        mModel = (MainFragmentOps.ProvidedModelOps) model;
+    }
+}
+```
+
+
