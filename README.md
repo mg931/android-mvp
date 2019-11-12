@@ -1,8 +1,8 @@
 # Android MVP
 
-This library provides a simple core framework for building Android apps using the MVP (Model-View-Presenter) pattern. 
+This library provides a core framework for building Android apps using the MVP (Model-View-Presenter) pattern. 
 
-The framework contains a set of core classes and base interfaces that can be extended to set up a basic MVP module with an Activity/Fragment as the view layer. 
+The framework contains a set of base classes and interfaces that can be extended to set up an MVP module with an Activity/Fragment as the view layer. 
 
 ![MVP Interfaces](https://cms-assets.tutsplus.com/uploads/users/1308/posts/26206/image/MVP_interfaces.png)
 
@@ -83,5 +83,34 @@ The Interactor layer contains the application's data and is where business rules
 implementation 'com.github.mg931:android-mvp:v0.0.5'
 ```
 
-# Setup an MVP Module (Activity View)   
-#### 1. Create a new Activity - (for this example it will be called MainActivity). 
+# Setup an MVP Module (Activity as View)   
+
+This example assumes you are setting up an MVP module for an activity called MainActivity. The naming convention for the classes in these examples will reflect this. 
+
+#### 1. Create an interface called MainMvpOps. 
+```
+public interface MainMvpOps {
+
+    interface BaseRequiredViewOps extends MvpOps.BaseRequiredViewOps {
+        //View operations permitted to presenter 
+    }
+
+    interface BaseProvidedPresenterOps extends MvpOps.BaseProvidedPresenterOps {
+        //Presenter operations permitted to view 
+    }
+
+    interface BaseRequiredPresenterOps extends MvpOps.BaseRequiredPresenterOps {
+        //Presenter operations permitted to model 
+    }
+
+    interface BaseProvidedModelOps extends MvpOps.BaseProvidedModelOps {
+        //Model operations permitted to presenter 
+    }
+}
+
+```
+
+
+
+
+
