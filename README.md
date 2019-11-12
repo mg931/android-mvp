@@ -87,24 +87,50 @@ implementation 'com.github.mg931:android-mvp:v0.0.5'
 
 This example assumes you are setting up an MVP module for an activity called MainActivity. The naming convention for the classes in these examples will reflect this. 
 
-#### 1. Create an interface called MainMvpOps. 
+#### 1. Create an interface called MainMvpOps. Inside, create four nested interfaces that extend from the framework. These interfaces will define how the MVP layers for this module will oeprate and interact with each other.  
 ```
 public interface MainMvpOps {
 
-    interface BaseRequiredViewOps extends MvpOps.BaseRequiredViewOps {
+    interface RequiredViewOps extends MvpOps.BaseRequiredViewOps {
         //View operations permitted to presenter 
     }
 
-    interface BaseProvidedPresenterOps extends MvpOps.BaseProvidedPresenterOps {
+    interface ProvidedPresenterOps extends MvpOps.BaseProvidedPresenterOps {
         //Presenter operations permitted to view 
     }
 
-    interface BaseRequiredPresenterOps extends MvpOps.BaseRequiredPresenterOps {
+    interface RequiredPresenterOps extends MvpOps.BaseRequiredPresenterOps {
         //Presenter operations permitted to model 
     }
 
-    interface BaseProvidedModelOps extends MvpOps.BaseProvidedModelOps {
+    interface ProvidedModelOps extends MvpOps.BaseProvidedModelOps {
         //Model operations permitted to presenter 
+    }
+}
+```
+
+#### 2. Create the view. The Activity will represent the view layer. It shoudld extend MvpActivity and implement MainMvpOps.RequiredViewOps which is the interface that the view will expose to the presenter. The setUpComponent() method is where the MVP classes are plugged into each other. Once initialised, the framework will spit out an MvpOps.ProvidedPresenterOps instance - this is how the view will communicate with the presenter.
+```
+public class MainActivity extends MvpActivity implements MainMvpOps.RequiredViewOps {
+    private MainMvpOps.ProvidedPresenterOps mPresenter;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+
+    @Override
+    protected MvpOps.ProvidedPresenterOps setUpComponent() {
+        MainPresenter presenter = new MainPresenter(this);
+        MainInteractor model = new MainInteractor(presenter);
+        presenter.setModel(model);
+        return presenter;
+    }
+
+    @Override
+    protected void componentInitialized(MvpOps.ProvidedPresenterOps pres) {
+        mPresenter = (MainMvpOps.ProvidedPresenterOps) pres;
     }
 }
 
