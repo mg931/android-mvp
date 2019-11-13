@@ -426,15 +426,18 @@ The following life-cycle methods are also called through the stack and you can o
 ## Caveats  
 
 #### Retaining the presenter  
-1. The framework will always attempt to store the presenter and reattach it when an activity is recreated after a screen rotation. There are certain instances where this is not guarenteed to happen, however:
+1. The framework will always attempt to store the presenter and re-attach it when an activity is recreated after a screen rotation. There are certain instances where this is not guarenteed to happen, however:
 - When the app is restored after a device reset. 
 - When the device is exceptionally low on memory.
-- When 'Do not keep activities' is checked inside the device's developer options. 
+- When 'Do not keep activities' is checked inside a device's developer options. 
 
-If you need to retain state in these scenarios, use the bundle passed in on onSavedInstanceState. 
+If you need to retain state in these scenarios, use the bundle passed through onSavedInstanceState and onCreate. 
 
 #### Avoiding memory leaks 
-Excercise caution if you store classes in your presenter/interactors that take a context or activity object in their constructors. 
+Excercise caution if you store classes in your presenter/interactors that retain a reference to a context or activity. If the presenter and interactor layers are retained when the activity is recreated, you'll end up with a memory leak. To avoid this...
+- Use an application context for things like database operations, loading resource values and starting services. Avoid retaining an activity context reference for anything ui releated, like inflating layouts, showing toasts or dialogs. 
+- If you do require an activity context, use it on demand and pass it in as a method argument. Do not retain it as a class property. 
+- Use a tool like [leak canary](https://github.com/square/leakcanary) to monitor whether your application is leaking memory. 
 
 
 
