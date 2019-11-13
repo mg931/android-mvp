@@ -125,8 +125,6 @@ public interface MainMvpOps {
 #### 2. Create the view. 
 
 The Activity will represent the view layer. It should extend MvpActivity and implement MainMvpOps.RequiredViewOps which is the interface that the view will expose to the presenter. The setUpComponent() method is where the MVP classes are plugged into each other. Once initialised, the framework will spit out an instance of MvpOps.ProvidedPresenterOps - which is how the view will access the operations it is permitted to call on the presenter. 
-
-The result of setUpComponent() will be stored by the framework on the first launch of the app. When the activity is being recreated after screen rotation, for example, the presenter will already exist and will be passed straight to componentInitialized() unless the device is very low on memory or 'do not keep activities' is checked in developer options (see caveats). 
 ```java
 public class MainActivity extends MvpActivity implements MainMvpOps.RequiredViewOps {
     private MainMvpOps.ProvidedPresenterOps mPresenter;
@@ -152,6 +150,7 @@ public class MainActivity extends MvpActivity implements MainMvpOps.RequiredView
 }
 
 ```
+The result of setUpComponent() will be stored by the framework on the first launch of the app. When the activity is being recreated after screen rotation, for example, the presenter will already exist and will be passed straight to componentInitialized() unless the device is very low on memory or 'do not keep activities' is checked in developer options (see caveats). 
 
 #### 3. Create the presenter. 
 
