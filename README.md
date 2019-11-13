@@ -38,7 +38,7 @@ For example...
 
   @Override
   public void setProgressBarVisibility(int visibility) {
-    progressDialog.setVisibility(visibility);
+    progressBar.setVisibility(visibility);
   }
 ```
 ### Presenter
