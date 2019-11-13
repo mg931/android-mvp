@@ -17,7 +17,7 @@ MVP is particularly useful for Android when test coverage is a high priority. Th
 * ### Managing the Life-cycle 
 Managing state and asynchronous operations can quickly evolve into a nightmare if you write all your code inside an Activity or Fragment. To make life easier, you might tell the activity not to recreate, or fix the device orientation in portrait - short term fixes that have many drawbacks. To address these issues, this framework handles the detachment and re-attachment of the presenter/model layers when the activity is destroyed/recreated during an event like screen rotation. It  injects in a new view instance into the presenter (all under the hood) which means the presenter always has access to an up-to-date reference to the view after any long-running operation. 
 * ### Separation of Concerns 
-Projects and code bases grow quickly and can become brittle with too much complexity and no clear structure. By enforcing  general rules about the responsibility of classes and their function within a wider architecture, it's possible to structure projects into a series of small, testable modules that are robust and easier to manage. 
+Projects and code bases grow quickly and can become brittle with too much complexity and no clear structure. By enforcing  general rules about the responsibility of classes and their function within a wider architecture, it's possible to structure projects into a series of small, testable modules that are more robust and easier to manage. 
 
 ## Roles and Responsibilities 
 
