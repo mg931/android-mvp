@@ -46,7 +46,7 @@ For example...
 The Presenter is responsible for configuring the user interface and delegating data-related operations to the interactor (e.g. save, store, update, retrieve).
 
 This example shows how the presenter might handle the user entering a note which is then posted to a web API. 
-```
+```java
     @Override
     public void storeNewNoteClicked() {
         Rescue.execute(() -> {
@@ -101,7 +101,7 @@ This example assumes you are setting up an MVP module for an activity called Mai
 #### 1. Create an interface called MainMvpOps. 
 
 Inside, create four nested interfaces that extend from the framework. These interfaces will define how the MVP layers for this module will operate and interact with each other.  
-```
+```java
 public interface MainMvpOps {
 
     interface RequiredViewOps extends MvpOps.BaseRequiredViewOps {
@@ -127,7 +127,7 @@ public interface MainMvpOps {
 The Activity will represent the view layer. It should extend MvpActivity and implement MainMvpOps.RequiredViewOps which is the interface that the view will expose to the presenter. The setUpComponent() method is where the MVP classes are plugged into each other. Once initialised, the framework will spit out an instance of MvpOps.ProvidedPresenterOps - which is how the view will access the operations it is permitted to call on the presenter. 
 
 The result of setUpComponent() will be stored by the framework on the first launch of the app. When the activity is being recreated after screen rotation, for example, the presenter will already exist and will be passed straight to componentInitialized() unless the device is very low on memory or 'do not keep activities' is checked in developer options (see caveats). 
-```
+```java
 public class MainActivity extends MvpActivity implements MainMvpOps.RequiredViewOps {
     private MainMvpOps.ProvidedPresenterOps mPresenter;
 
@@ -156,7 +156,7 @@ public class MainActivity extends MvpActivity implements MainMvpOps.RequiredView
 #### 3. Create the presenter. 
 
 The presenter acts as a middle man and communicates with the view and model. It communicates with the view using the MainMvpOps.RequiredViewOps interface (stored as a weak reference) and with the model using the MainMvpOps.ProvidedModelOps interface. Use the getView() helper method when calling the view from inside the presenter - the view may be unavailable in certain scenarios such as when the activity is being destroyed/recreated, so this method can throw a NullPointerException. 
-```
+```java
 public class MainPresenter extends MvpPresenter implements MainMvpOps.ProvidedPresenterOps,
         MainMvpOps.RequiredPresenterOps  {
     private WeakReference<MainMvpOps.RequiredViewOps> mView;
@@ -192,7 +192,7 @@ public class MainPresenter extends MvpPresenter implements MainMvpOps.ProvidedPr
 
 Like the view, the model only communicates with the presenter - however, it's only concern should be data and it should know nothing about the user interface (configuring the ui is the presenter's responsibility). It communicates with the presenter using the MainMvpOps.RequiredPresenterOps interface. 
 
-```
+```java
 public class MainInteractor extends MvpInteractor implements MainMvpOps.ProvidedModelOps {
     private MainMvpOps.RequiredPresenterOps mPresenter;
     
@@ -210,7 +210,7 @@ Setting up an MVP module using a fragment is similar to the activity setup. It i
 
 #### 1. Create an interface called MainFragmentOps. 
 
-```
+```java
 public interface MainFragmentOps {
     interface RequiredViewOps extends MvpFragOps.BaseRequiredViewOps {
 
@@ -234,7 +234,7 @@ public interface MainFragmentOps {
 
 Here Mvp fragment extends Fragment. 
 
-```
+```java
 public class MainFragment extends MvpFragment implements MainFragmentOps.RequiredViewOps {
     private MainFragmentOps.ProvidedPresenterOps mPresenter;
 
@@ -255,7 +255,7 @@ public class MainFragment extends MvpFragment implements MainFragmentOps.Require
 
 #### 3. Create the presenter.
 
-```
+```java
 public class MainFragmentPresenter extends MvpFragmenPresenter implements
         MainFragmentOps.ProvidedPresenterOps, MainFragmentOps.RequiredPresenterOps {
     private WeakReference<MainFragmentOps.RequiredViewOps> mView;
@@ -289,7 +289,7 @@ public class MainFragmentPresenter extends MvpFragmenPresenter implements
 
 #### 4. Create the model/interactor. 
 
-```
+```java
 public class MainFragmentInteractor extends MvpFragmentInteractor implements MainFragmentOps.ProvidedModelOps {
     private MainFragmentOps.RequiredPresenterOps mPresenter;
 
@@ -303,7 +303,7 @@ public class MainFragmentInteractor extends MvpFragmentInteractor implements Mai
 The framework includes a few extra helpers you can call from your presenters. 
 
 #### Activity Presenter 
-```
+```java
 //get the current context
 Context context = mPresenter.context();
 
@@ -317,7 +317,7 @@ String myString = mPresenter.getStringResource(R.id.my_string);
 Intent intent = mPresenter.getActivityIntent(R.id.my_string);
 ```
 #### Fragment Presenter 
-```
+```java
 //get the current context
 Context context = mPresenter.context();
 
@@ -331,7 +331,7 @@ Bundle bundle = mPresenter.getFragmentArgs();
 The following life-cycle methods are also called through the stack and you can override them inside your presenters and interactor classes. The activity onDestroy() contains an additonal flag isChangingConfigurations(). 
 
 #### Activity 
-```
+```java
  @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -373,7 +373,7 @@ The following life-cycle methods are also called through the stack and you can o
     }
 ```
 #### Fragment
-```
+```java
   @Override
     public void onAttach(Context context) {
         super.onAttach(context);
