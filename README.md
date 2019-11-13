@@ -25,7 +25,7 @@ Projects and code bases grow quickly and can become brittle with too much comple
 The view only knows about the presenter and it's responsibilities do not extend beyond providing the presenter with a way to access UI components. It should be as passive as possible and contain short (ideally one line) methods for updating UI components. 
 
 For example... 
-```
+```java
   @Override
   public void updateMyTextView(String text) {
     myTextView.setText(text);
