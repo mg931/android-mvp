@@ -1,8 +1,6 @@
 # Android MVP
 
-This library provides a core framework for building Android apps using the MVP (Model-View-Presenter) pattern. MVP is one of many patterns that can be used to build Android apps and there is no clear consensus on the best approach. A consistent architecture brings significant advantages to any code base, however. When classes take on clearly defined roles, code becomes easier to change, manage, maintain and revisit months or even years later. 
-
-This framework came out of a commercial Android app that was built for the civil engineering sector. It contains a set of components that can be extended to set up an MVP module with an Activity/Fragment as the view layer. The pattern uses four interfaces to define the operations and interactions between each layer within the stack. The basic flow is view -> presenter -> interactor -> presenter -> view (as shown below). 
+This library provides a core framework for building Android apps using the MVP (Model-View-Presenter) pattern. It came out of a commercial Android app that was built for the civil engineering sector, and contains a set of components that can be extended to set up an MVP module with an Activity/Fragment as the view layer. The pattern uses four interfaces to define the operations and interactions between each layer within the stack. The basic flow is view -> presenter -> interactor -> presenter -> view (as shown below). 
 
 ![MVP Interfaces](https://cms-assets.tutsplus.com/uploads/users/1308/posts/26206/image/MVP_interfaces.png)
 
@@ -17,7 +15,7 @@ MVP is particularly useful for Android when test coverage is a high priority. Th
 * ### Managing the Life-cycle 
 Managing state and asynchronous operations can quickly evolve into a nightmare if you write all your code inside an Activity or Fragment. To make life easier, you might tell the activity not to recreate, or fix the device orientation in portrait - short term fixes that have many drawbacks. To address these issues, this framework handles the detachment and re-attachment of the presenter/model layers when the activity is destroyed/recreated during an event like screen rotation. It  injects in a new view instance into the presenter (all under the hood) which means the presenter always has access to an up-to-date reference to the view after any long-running operation. 
 * ### Separation of Concerns 
-Projects and code bases grow quickly and can become brittle with too much complexity and no clear structure. By enforcing  general rules about the responsibility of classes and their function within a wider architecture, it's possible to structure projects into a series of small, testable modules that are more robust and easier to manage. 
+Projects and code bases grow quickly and can become brittle with too much complexity and no clear structure. By enforcing  general rules about the responsibility of classes and their function within a wider architecture, code becomes easier to change, manage, maintain and revisit months or even years later. 
 
 ## Roles and Responsibilities 
 
